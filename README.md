@@ -2,7 +2,7 @@
 Generate RAML documents from annotated php source files.
 
 [RAML](http://raml.org/) is a modeling language for describing RESTful APIs and is a supplementary document that comes 
-alongside the API. To avoid a drifting apart of the implementation and it's documentation over time this library
+alongside with the API. To avoid a drifting apart of the implementation and it's documentation over time this library
 provides the ability to generate RAML documents based on the annotated source code files implementing the API.
  
 This does not solve the problem completely, because the annotations need to be kept up to date as well. In return they
@@ -48,11 +48,13 @@ Supported annotations on file-level are:
     
 - Protocol
 
-    The protocol that is used to access the API, e. g "HTTPS".
+    The protocol that is used to access the API, e. g "HTTPS". If more than one protocol is supported, add as many
+    protocol annotation tags as needed.
     
 - SecurityScheme
 
-    name="basic", type="Basic Authentication"
+    Describing the supported security schemes. If more than one security scheme is supported, add as many annotation
+    tags as needed. Example for basic authentication: name="basic", type="Basic Authentication".
     
 An example of a file-level docblock containing RAML specific annotations:
 
@@ -64,6 +66,51 @@ An example of a file-level docblock containing RAML specific annotations:
  * @\raml\annotations\MediaType(mediaType="application/json")
  * @\raml\annotations\Protocol(protocol="HTTPS")
  * @\raml\annotations\SecurityScheme(name="basic", type="Basic Authentication")
+ */
+```
+
+After specifying general information about the REST API we now proceed to describing the operations the API consists of.
+In most cases a REST API call will be mapped to a class function, a method. Therefor methods need to be annotated by the
+following tags supported on method-level: 
+
+- Resource
+
+    Specifies the part of the URI after the base URI, that is used to name a resource, e. g. "/albums".
+    
+- HttpVerb
+
+    A HTTP verb, that is used to access a resource, e. g. "POST".
+    
+- Description
+
+    Description of the resource or operation.
+    
+- SecuredBy
+
+    Use the name of one of the security schemes here, that were defined in a security scheme tag on file level, 
+    e. g. "basic".
+    
+- Parameter
+
+    Use multiple parameter annotation tags to specify all parameters, that are necessary for an operation on the REST
+    API. See the following source code snippet for an example.
+
+```php
+/**
+ * @\raml\annotations\Resource(resource="/anonymousInterpretations")
+ * @\raml\annotations\HttpVerb(verb="POST")
+ * @\raml\annotations\Description(description="Create anonymous interpretation")
+ * @\raml\annotations\SecuredBy(scheme="basic")
+ * @\raml\annotations\Parameter(
+ *   parameterType="form",
+ *   name="clientCode",
+ *   displayName="Client code",
+ *   description="Code identifying the client",
+ *   type="string",
+ *   pattern="^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+ *   required="true",
+ *   example="b4762505-b108-46a0-a4c7-f79c4b224b58"
+ * )
  */
 ```
 
