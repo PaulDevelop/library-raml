@@ -67,6 +67,13 @@ An example of a file-level docblock containing RAML specific annotations:
  * @\raml\annotations\Protocol(protocol="HTTPS")
  * @\raml\annotations\SecurityScheme(name="basic", type="Basic Authentication")
  */
+ 
+/**
+ * Class-level docblock
+ */
+class AClass {
+   ...
+}
 ```
 
 After specifying general information about the REST API we now proceed to describing the operations the API consists of.
@@ -96,22 +103,31 @@ following tags supported on method-level:
     API. See the following source code snippet for an example.
 
 ```php
-/**
- * @\raml\annotations\Resource(resource="/anonymousInterpretations")
- * @\raml\annotations\HttpVerb(verb="POST")
- * @\raml\annotations\Description(description="Create anonymous interpretation")
- * @\raml\annotations\SecuredBy(scheme="basic")
- * @\raml\annotations\Parameter(
- *   parameterType="form",
- *   name="clientCode",
- *   displayName="Client code",
- *   description="Code identifying the client",
- *   type="string",
- *   pattern="^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
- *   required="true",
- *   example="b4762505-b108-46a0-a4c7-f79c4b224b58"
- * )
- */
+...
+class AClass {
+    ....
+    
+    /**
+     * @\raml\annotations\Resource(resource="/anonymousInterpretations")
+     * @\raml\annotations\HttpVerb(verb="POST")
+     * @\raml\annotations\Description(description="Create anonymous interpretation")
+     * @\raml\annotations\SecuredBy(scheme="basic")
+     * @\raml\annotations\Parameter(
+     *   parameterType="form",
+     *   name="clientCode",
+     *   displayName="Client code",
+     *   description="Code identifying the client",
+     *   type="string",
+     *   pattern="^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+     *   required="true",
+     *   example="b4762505-b108-46a0-a4c7-f79c4b224b58"
+     * )
+     */
+    public function doSomething(...) {
+    }
+
+    ...
+}
 ```
 
 ### Generating
