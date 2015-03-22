@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit>
+    <filter>
+    </filter>
+    <testsuites>
+        <testsuite name="library-raml">
+            <directory suffix=".php">.</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

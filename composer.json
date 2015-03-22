@@ -1,0 +1,37 @@
+{
+  "name": "pauldevelop/library-raml",
+  "description": "Generate RAML documents from annotated class files.",
+  "keywords": ["PaulDevelop", "library"],
+  "homepage": "https://github.com/pauldevelop/library-raml",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Rüdiger Scheumann",
+      "email": "info@pauldevelop.de",
+      "homepage": "http://pauldevelop.de"
+    }
+  ],
+  "minimum-stability": "dev",
+  "config": {
+    "vendor-dir": "lib/vendor"
+  },
+  "require": {
+    "pauldevelop/library-common": "*@dev"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "3.7.*",
+    "phpdocumentor/phpdocumentor": "2.5.*@dev",
+    "squizlabs/php_codesniffer": "1.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "com\\pauldevelop\\library\\raml\\": "src/class"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "0.0.x-dev"
+    }
+  }
+}
