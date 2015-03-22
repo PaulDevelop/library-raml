@@ -30,7 +30,20 @@ class AClassB {
 
     #region methods
     /**
-     * @\raml\annotations\Title(title="B METHOD LEVEL 1")
+     * @\raml\annotations\Resource(resource="/personalizedInterpretation")
+     * @\raml\annotations\HttpVerb(verb="POST")
+     * @\raml\annotations\Description(description="Calculate personalized interpretation")
+     * @\raml\annotations\SecuredBy(scheme="basic")
+     * @\raml\annotations\Parameter(
+     *   parameterType="form",
+     *   name="clientCode",
+     *   displayName="Client code",
+     *   description="Code identifying the client",
+     *   type="string",
+     *   pattern="^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+     *   required="true",
+     *   example="b4762505-b108-46a0-a4c7-f79c4b224b58"
+     * )
      */
     public function aMethod1() {
 

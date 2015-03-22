@@ -31,7 +31,7 @@ class FileAnnotations extends Base
     /**
      * @param AnnotationCollection $fileLevel
      * @param AnnotationCollection $classLevel
-     * @param array $methodsLevel
+     * @param array                $methodsLevel
      */
     public function __construct(
         AnnotationCollection $fileLevel = null,

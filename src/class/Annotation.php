@@ -7,30 +7,49 @@ use Com\PaulDevelop\Library\Common\Base;
 class Annotation extends Base
 {
     #region member
+    /**
+     * @var string
+     */
     private $name;
-    private $parameter; // collection
+    /**
+     * @var AnnotationCollection|AnnotationParameterCollection
+     */
+    private $parameter;
     #endregion
 
     #region constructor
-    public function __construct($name = '', $parameter = array())
+    /**
+     * @param string                        $name
+     * @param AnnotationParameterCollection $parameter
+     */
+    public function __construct($name = '', AnnotationParameterCollection $parameter = null)
     {
         $this->name = $name;
-        $this->parameter = $parameter;
+        $this->parameter = $parameter == null ? new AnnotationCollection() : $parameter;
     }
     #endregion
 
     #region properties
+    /**
+     * @return string
+     */
     public function getName()
     {
         return $this->name;
     }
 
+    /**
+     * @return string
+     */
     public function getShortName()
     {
         $chunks = preg_split('/\\\\/', $this->name);
         return lcfirst(array_pop($chunks));
     }
 
+    /**
+     * @return AnnotationCollection|AnnotationParameterCollection
+     */
     public function getParameter()
     {
         return $this->parameter;
