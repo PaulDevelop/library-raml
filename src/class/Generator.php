@@ -23,8 +23,9 @@ class Generator
         $fileList = self::getFiles($directoryToScan, $recursion);
         foreach ($fileList as $file) {
             $fileAnnotations = Parser::process($file);
-            if (($titleAnnotation = self::findAnnotation($fileAnnotations->getFileLevel(), 'title')) !== null
-                && $titleAnnotation->getParameter()['title']->getValue() != $apiTitle
+            if (($titleAnnotation = self::findAnnotation($fileAnnotations->getFileLevel(), 'title')) == null
+                || (($titleAnnotation = self::findAnnotation($fileAnnotations->getFileLevel(), 'title')) !== null
+                    && $titleAnnotation->getParameter()['title']->getValue() != $apiTitle)
             ) {
                 continue;
             }
@@ -66,7 +67,7 @@ class Generator
 
                     /** @var Annotation $annotation */
                     foreach ($annotations as $annotation) {
-                        $ramlDocument .= '  - '.$annotation->getParameter()['name']->getValue().PHP_EOL;
+                        $ramlDocument .= '  - '.$annotation->getParameter()['name']->getValue().':'.PHP_EOL;
                         $ramlDocument .= '      type: '.$annotation->getParameter()['type']->getValue().PHP_EOL;
                     }
                 }
@@ -111,12 +112,6 @@ class Generator
                         /** @var Annotation $annotation */
                         foreach ($annotations as $annotation) {
                             $ramlDocument .= '      '.$annotation->getParameter()['name']->getValue().':'.PHP_EOL;
-                            $ramlDocument .= '        displayName: '.$annotation->getParameter()['displayName']->getValue().PHP_EOL;
-                            $ramlDocument .= '        description: '.$annotation->getParameter()['description']->getValue().PHP_EOL;
-                            $ramlDocument .= '        type: '.$annotation->getParameter()['type']->getValue().PHP_EOL;
-                            $ramlDocument .= '        pattern: '.$annotation->getParameter()['pattern']->getValue().PHP_EOL;
-                            $ramlDocument .= '        required: '.$annotation->getParameter()['required']->getValue().PHP_EOL;
-                            $ramlDocument .= '        example: '.$annotation->getParameter()['example']->getValue().PHP_EOL;
 
                             // display name
                             if (($parameter = $annotation->getParameter()['displayName']) != null) {
@@ -156,7 +151,7 @@ class Generator
                         }
                     }
                 } else {
-                    if ($httpVerb == 'POST') {
+                    if ($httpVerb == 'POST' || $httpVerb == 'PATCH') {
                         $ramlDocument .= '    body:'.PHP_EOL;
                         $ramlDocument .= '      application/x-www-form-urlencoded:'.PHP_EOL;
                         $ramlDocument .= '        formParameter:'.PHP_EOL;
