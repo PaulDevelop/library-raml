@@ -272,7 +272,7 @@ class Generator
                             if (($responseScheme = $responseSchemes[$parameter->getValue()]) != null) {
                                 /** @var $url AnnotationParameter */
                                 if (($url = $responseScheme->getParameter()['url']) != null) {
-                                    echo '    url: '.$url->getValue().PHP_EOL;
+//                                    echo '    url: '.$url->getValue().PHP_EOL;
                                     $ramlDocument .= '            schema: !include '.$url->getValue().PHP_EOL;
                                 }
                             }
@@ -290,7 +290,7 @@ class Generator
                             if (($responseScheme = $responseSchemes[$parameter->getValue()]) != null) {
                                 /** @var $url AnnotationParameter */
                                 if (($url = $responseScheme->getParameter()['url']) != null) {
-                                    echo '    url: '.$url->getValue().PHP_EOL;
+//                                    echo '    url: '.$url->getValue().PHP_EOL;
                                     $ramlDocument .= '            example: !include '.$url->getValue().PHP_EOL;
                                 }
                             }
