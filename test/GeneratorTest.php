@@ -11,11 +11,17 @@ class GeneratorTest extends \PHPUnit_Framework_TestCase
      */
     public function testRamlAnnotatedClasses()
     {
+//        $directoryToScan = realpath(
+//            dirname(__FILE__)
+//            .DIRECTORY_SEPARATOR.'assets'
+//            .DIRECTORY_SEPARATOR.'testRamlAnnotatedClasses'
+//            .DIRECTORY_SEPARATOR.'simple'
+//        );
         $directoryToScan = realpath(
             dirname(__FILE__)
             .DIRECTORY_SEPARATOR.'assets'
-            .DIRECTORY_SEPARATOR.'testRamlAnnotatedClasses'
-            .DIRECTORY_SEPARATOR.'simple'
+            .DIRECTORY_SEPARATOR.'testRamlAnnotatedClass'
+//            .DIRECTORY_SEPARATOR.'simple'
         );
 
         $generator = new Generator();
