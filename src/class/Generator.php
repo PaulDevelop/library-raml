@@ -215,42 +215,20 @@ class Generator
                 }
 
                 // responses
-//                var_dump($methodAnnotations);
-//                var_dump($this->findAnnotations($methodAnnotations, 'response'));die;
                 if (count($annotations = $this->findAnnotations($methodAnnotations, 'response')) > 0) {
-
                     $ramlDocument .= '    responses:'.PHP_EOL;
 
-/*
-
-    responses:
-      200:
-        body:
-          application/json:
-            schema: |
-
-
-*/
-
-
-//                    $ramlDocument .= '    description: '.$annotation->getParameter()['description']->getValue().PHP_EOL;
                     /** @var Annotation $annotation */
                     foreach ($annotations as $annotation) {
-//                        $securedByString .= ($securedByString != '' ? ', ' : '').$annotation->getParameter()['scheme']->getValue();
-//                        var_dump($annotation);
-//                        echo $annotation->getName().PHP_EOL;
-
                         // statusCode
                         if (($parameter = $annotation->getParameter()['statusCode']) != null) {
                             /** @var AnnotationParameter $parameter */
-//                            echo '  statusCode: '.$parameter->getValue().PHP_EOL;
                             $ramlDocument .= '      '.$parameter->getValue().PHP_EOL;
                         }
 
                         // description
                         if (($parameter = $annotation->getParameter()['description']) != null) {
                             /** @var AnnotationParameter $parameter */
-//                            echo '  description: '.$parameter->getValue().PHP_EOL;
                             $ramlDocument .= '        description: '.$parameter->getValue().PHP_EOL;
                         }
 
@@ -258,65 +236,32 @@ class Generator
                         if (($parameter = $annotation->getParameter()['contentType']) != null) {
                             $ramlDocument .= '        body:'.PHP_EOL;
                             /** @var AnnotationParameter $parameter */
-//                            echo '  contentType: '.$parameter->getValue().PHP_EOL;
                             $ramlDocument .= '          '.$parameter->getValue().PHP_EOL;
                         }
 
                         // schema
                         if (($parameter = $annotation->getParameter()['schema']) != null) {
-                            /** @var AnnotationParameter $parameter */
-//                            echo '  schema: '.$parameter->getValue().PHP_EOL;
-//                            $ramlDocument .= '            schema: '.$parameter->getValue().PHP_EOL;
-
                             /** @var $responseScheme Annotation */
                             if (($responseScheme = $responseSchemes[$parameter->getValue()]) != null) {
                                 /** @var $url AnnotationParameter */
                                 if (($url = $responseScheme->getParameter()['url']) != null) {
-//                                    echo '    url: '.$url->getValue().PHP_EOL;
                                     $ramlDocument .= '            schema: !include '.$url->getValue().PHP_EOL;
                                 }
                             }
-
-//                            var_dump($responseSchemes[$parameter->getValue()]);
                         }
 
                         // example
                         if (($parameter = $annotation->getParameter()['example']) != null) {
-                            /** @var AnnotationParameter $parameter */
-//                            echo '  example: '.$parameter->getValue().PHP_EOL;
-//                            $ramlDocument .= '            displayName: '.$parameter->getValue().PHP_EOL;
-
                             /** @var $responseScheme Annotation */
                             if (($responseScheme = $responseSchemes[$parameter->getValue()]) != null) {
                                 /** @var $url AnnotationParameter */
                                 if (($url = $responseScheme->getParameter()['url']) != null) {
-//                                    echo '    url: '.$url->getValue().PHP_EOL;
                                     $ramlDocument .= '            example: !include '.$url->getValue().PHP_EOL;
                                 }
                             }
                         }
-
-
-//                        var_dump($annotation->getParameter());
-
-//                        // name
-//                        if (($parameter = $annotation->getParameter()['Name']) != null) {
-//                            /** @var AnnotationParameter $parameter */
-//                            echo '  name: '.$parameter->getValue().PHP_EOL;
-////                            $ramlDocument .= '            displayName: '.$parameter->getValue().PHP_EOL;
-//                        }
-//
-//                        // url
-//                        if (($parameter = $annotation->getParameter()['Url']) != null) {
-//                            /** @var AnnotationParameter $parameter */
-//                            echo '  url: '.$parameter->getValue().PHP_EOL;
-////                            $ramlDocument .= '            displayName: '.$parameter->getValue().PHP_EOL;
-//                        }
                     }
-
-//                    die;
                 }
-
             }
         }
 
