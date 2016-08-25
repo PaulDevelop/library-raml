@@ -209,6 +209,38 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                         ),
                         'key'
                     )
+                ),
+                new Annotation(
+                    '\raml\annotations\ResponseScheme',
+                    new AnnotationParameterCollection(
+                        array(
+                            new AnnotationParameter(
+                                'name',
+                                'interpretation-result'
+                            ),
+                            new AnnotationParameter(
+                                'url',
+                                'https://api.karmap.com/patterns/v1/schema-interpretation-result.json'
+                            )
+                        ),
+                        'key'
+                    )
+                ),
+                new Annotation(
+                    '\raml\annotations\ResponseScheme',
+                    new AnnotationParameterCollection(
+                        array(
+                            new AnnotationParameter(
+                                'name',
+                                'interpretation-result-example'
+                            ),
+                            new AnnotationParameter(
+                                'url',
+                                'https://api.karmap.com/patterns/v1/schema-interpretation-result-example.json'
+                            )
+                        ),
+                        'key'
+                    )
                 )
             )//,
             //'name'
@@ -504,7 +536,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                             array(
                                 new AnnotationParameter(
                                     'resource',
-                                    '/anonymousInterpretations'
+                                    '/anonymousInterpretationsWithResponse'
                                 )
                             ),
                             'key'

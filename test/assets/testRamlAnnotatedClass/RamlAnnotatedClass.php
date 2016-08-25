@@ -7,6 +7,8 @@
  * @\raml\annotations\MediaType(mediaType="application/json")
  * @\raml\annotations\Protocol(protocol="HTTPS")
  * @\raml\annotations\SecurityScheme(name="basic", type="Basic Authentication")
+ * @\raml\annotations\ResponseScheme(name="interpretation-result", url="https://api.karmap.com/patterns/v1/schema-interpretation-result.json")
+ * @\raml\annotations\ResponseScheme(name="interpretation-result-example", url="https://api.karmap.com/patterns/v1/schema-interpretation-result-example.json")
  */
 
 /**
