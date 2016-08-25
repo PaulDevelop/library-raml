@@ -99,7 +99,7 @@ abstract class Parser
     /**
      * @param string $docblock
      *
-     * @return array
+     * @return AnnotationCollection
      */
     private static function parseDocblock($docblock = '')
     {
